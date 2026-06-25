@@ -55,6 +55,16 @@ launchctl load ~/Library/LaunchAgents/com.richardbray.playkey.plist
 Edit the path in the plist if your binary lives somewhere other than `~/playkey/playkey`.
 After rebuilding the binary, restart it with `launchctl unload` then `launchctl load`.
 
+## Why not noTunes?
+
+[noTunes](https://github.com/tombonez/noTunes) solves the same core annoyance and is excellent.
+playkey exists because I wanted two things noTunes doesn't quite give me:
+
+- **Run an arbitrary command, in code I own.** playkey is a single ~60-line Swift file I can read end to end and bend to whatever I want on an empty-tray press (speak a phrase now, trigger anything later). noTunes' replacement feature launches an app; I wanted full control without a menu-bar app in the loop.
+- **Learning / hackability.** Building it myself meant understanding exactly how the media key routes and how Music gets suppressed, rather than installing a black box.
+
+If you just want to stop Music launching and don't care about customising the behaviour, **use noTunes** - it's maintained and battle-tested. playkey is the build-it-yourself option.
+
 ## Notes
 
 - playkey quits **every** Apple Music launch, so while it's running you can't open Music on purpose. Stop playkey first if you want to use Music.
