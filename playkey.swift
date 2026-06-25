@@ -38,8 +38,16 @@ func ensurePhraseRendered() {
     let p = Process()
     p.executableURL = URL(fileURLWithPath: "/usr/bin/say")
     p.arguments = ["-o", cacheURL.path, PHRASE]
-    try? p.run()
-    p.waitUntilExit()
+    do {
+        try p.run()
+        p.waitUntilExit()
+    } catch {
+        fputs("warning: failed to run say: \(error)\n", stderr)
+        return
+    }
+    if p.terminationStatus != 0 || !FileManager.default.fileExists(atPath: cacheURL.path) {
+        fputs("warning: failed to render phrase audio; the alert will be silent.\n", stderr)
+    }
 }
 
 let COMMAND = ["/usr/bin/afplay", cacheURL.path]
